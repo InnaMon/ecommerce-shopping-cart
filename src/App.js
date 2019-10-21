@@ -70,12 +70,18 @@ class App extends Component {
       if(!productAlreadyInCart) {
         cartItems.push({...product, count: 1});
       }
-      localStorage.setItem("cartItems", JSON.stringify(cartItems)); //saves cartItems inside the key of "cardItems"
+      localStorage.setItem('cartItems', JSON.stringify(cartItems)); //saves cartItems inside the key of "cardItems"
       return { cartItems: cartItems };
     });
   }
 
-  handleRemoveFromCart = () => {}
+  handleRemoveFromCart = (e, product) => {
+    this.setState(state => {
+      const cartItems = state.cartItems.filter(item => item.id !== product.id);
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+      return {cartItems};
+    })
+  }
 
   render() {
     console.log('products', this.state);
