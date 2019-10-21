@@ -21,6 +21,9 @@ class App extends Component {
           filteredProducts: data
         })
       );
+    if(localStorage.getItem('cartItems')) {
+      this.setState({cartItems: JSON.parse(localStorage.getItem('cartItems'))})
+    } //fetches from localStorage the saved basket and then parses string into JS object, now data does not dissapear upon every page refresh
   }
 
   listProducts = () => {
