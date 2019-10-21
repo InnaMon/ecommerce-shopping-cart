@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import Products from './components/Products/Products';
 import Filter from './components/Filter/Filter';
+import Basket from './components/Basket/Basket';
 import './App.css';
 
 class App extends Component { 
   state = {
     products: [],
     filteredProducts: [],
+    cartItems: [],
     size: '',
     sort: ''
   };
@@ -50,6 +52,28 @@ class App extends Component {
     this.listProducts();
   }
 
+  handleAddToCart = (e, product) => {
+    this.setState(state => {
+      const cartItems = state.cartItems;
+      let productAlreadyInCart = false;
+
+      cartItems.forEach(item => {
+        if(item.id === product.id){
+          productAlreadyInCart = true;
+          item.count++;
+        }
+      });
+
+      if(!productAlreadyInCart) {
+        cartItems.push({...product, count: 1});
+      }
+      localStorage.setItem("cartItems", JSON.stringify(cartItems)); //saves cartItems inside the key of "cardItems"
+      return { cartItems: cartItems };
+    });
+  }
+
+  handleRemoveFromCart = () => {}
+
   render() {
     console.log('products', this.state);
     return (
@@ -57,6 +81,7 @@ class App extends Component {
         <h1>Ecommerce Shopping Cart Application</h1>
         <hr/>
         <div className="row">
+
           <div className="col-md-8">
             <Filter 
             size={this.state.size} 
@@ -69,8 +94,13 @@ class App extends Component {
               products={this.state.filteredProducts} 
               handleAddToCart={this.handleAddToCart}/>
           </div>
+
           <div className="col-md-4">
+            <Basket 
+              cartItems={this.state.cartItems}
+              handleRemoveFromCart={this.handleRemoveFromCart}/>
           </div>
+
         </div>
       </div>
     );
