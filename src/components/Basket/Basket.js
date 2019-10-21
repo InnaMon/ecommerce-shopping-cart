@@ -11,7 +11,7 @@ class Basket extends Component {
                         <ul>
                             {cartItems.map(item => 
                                 <li>
-                                    <b>{item.title}</b> x {item.count}
+                                    <b>{item.title}</b> x {item.count} = ${(item.price * item.count).toFixed(2)}
                                     <button className="btn btn-danger"
                                     onClick={e => this.props.handleRemoveFromCart(e, item)}
                                     >
@@ -19,6 +19,7 @@ class Basket extends Component {
                                     </button>
                                 </li>)}
                         </ul>
+                        Total: ${cartItems.reduce((total, item) => (total + item.price*item.count).toFixed(2), 0)}
                     </div>
                 }
             </div>
