@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import Products from './components/Products/Products';
+import Filter from './components/Filter/Filter';
 import './App.css';
 
 class App extends Component { 
   state = {
     products: [],
-    filteredProducts: []
+    filteredProducts: [],
+    size: '',
+    sort: ''
   };
 
   componentDidMount() {
@@ -18,6 +21,25 @@ class App extends Component {
       );
   }
 
+  listProducts = () => {
+    this.setState(state => {
+      if(state.sort) {
+        state.products.sort((a,b) => 
+          (state.sort === 'lowest'
+          ? ((a.price > b.price) ? 1 : -1) 
+          : ((a.price < b.price) ? 1 : -1)))
+      } else {
+        state.products.sort((a,b) => (a.id > b.id) ? 1 : -1);
+      }
+      return {filteredProducts: state.products};
+    })
+  }
+
+  handleChangeSort = e => {
+    this.setState({sort: e.target.value});
+    this.listProducts();
+  }
+
   render() {
     console.log('products', this.state);
     return (
@@ -26,6 +48,13 @@ class App extends Component {
         <hr/>
         <div className="row">
           <div className="col-md-8">
+            <Filter 
+            size={this.state.size} 
+            sort={this.state.sort} 
+            handleChangeSize={this.handleChangeSize} 
+            handleChangeSort={this.handleChangeSort}
+            count={this.state.filteredProducts.length}/>
+            <hr/>
             <Products 
               products={this.state.filteredProducts} 
               handleAddToCart={this.handleAddToCart}/>

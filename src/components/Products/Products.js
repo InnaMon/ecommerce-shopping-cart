@@ -13,7 +13,7 @@ class Products extends Component {
                         <div>
                             <b>${product.price.toFixed(2)}</b>
                             <button 
-                                className="btn btn-primary" 
+                                className="btn btn-primary " 
                                 onClick={e => this.props.handleAddToCart(e, product)}>
                                 Add To Cart
                             </button>
