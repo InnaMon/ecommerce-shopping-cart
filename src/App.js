@@ -9,7 +9,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    fetch("http://localhost:3000/products")
+    fetch("http://localhost:8000/products")
         .then(response=> response.json())
         .then(data => this.setState({ 
           products: data,
