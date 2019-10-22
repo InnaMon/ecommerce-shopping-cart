@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class Basket extends Component {
     render() {
         const {cartItems} = this.props; //same as this.props.cartItems but use Object destructuring 
+        let total = cartItems.reduce((currentTotal, currentItem) => currentTotal + currentItem.price * currentItem.count, 0);
         return (
             <div className="alert alert-info">
                 {!cartItems.length ? "Basket is empty" : <div>You have {cartItems.length} products in your cart</div>}
@@ -19,7 +20,7 @@ class Basket extends Component {
                                     </button>
                                 </li>)}
                         </ul>
-                        Total: ${cartItems.reduce((total, item) => (total + item.price * item.count), 0)}
+                        Total: ${total.toFixed(2)}
                         <br/>
                         <button className="btn btn-primary" onClick={() => alert('You Are Ready To Checkout!')}>Checkout</button>
                     </div>
