@@ -19,7 +19,9 @@ class Basket extends Component {
                                     </button>
                                 </li>)}
                         </ul>
-                        Total: ${cartItems.reduce((total, item) => (total + item.price*item.count).toFixed(2), 0)}
+                        Total: ${cartItems.reduce((total, item) => (total + item.price * item.count), 0)}
+                        <br/>
+                        <button className="btn btn-primary" onClick={() => alert('You Are Ready To Checkout!')}>Checkout</button>
                     </div>
                 }
             </div>
