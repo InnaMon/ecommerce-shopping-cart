@@ -22,8 +22,10 @@ class App extends Component {
         })
       );
     if(localStorage.getItem('cartItems')) {
-      this.setState({cartItems: JSON.parse(localStorage.getItem('cartItems'))}) //returns valued saved under the 'cartItems' key
-    } //fetches from localStorage the saved basket and then parses string into JS object, now data does not dissapear upon every page refresh
+      this.setState({cartItems: JSON.parse(localStorage.getItem('cartItems'))}) 
+      // returns valued saved under the 'cartItems' key
+    } 
+    // fetches from localStorage the saved basket and then parses string into JS object, now data does not dissapear upon every page refresh
   }
 
   listProducts = () => {
@@ -70,17 +72,36 @@ class App extends Component {
       if(!productAlreadyInCart) {
         cartItems.push({...product, count: 1}); //add the selected product object into the cartItems array along with the count property
       }
-      localStorage.setItem('cartItems', JSON.stringify(cartItems)); //saves cartItem value inside the key of "cardItems"(name of localStorage item), must be saved as a string
+      localStorage.setItem('cartItems', JSON.stringify(cartItems)); 
+      //saves cartItem value inside the key of "cardItems"(name of localStorage item), must be saved as a string
       return { cartItems: cartItems };
     });
+    console.log('cartItems', this.state.cartItems);
   }
 
   handleRemoveFromCart = (e, product) => {
+    // this.setState(state => {
+    //   const cartItems = state.cartItems.filter(item => item.id !== product.id);
+    //   localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    //   console.log('local storage cartItems', this.state.cartItems);
+    //   return {cartItems};
+    // })
     this.setState(state => {
-      const cartItems = state.cartItems.filter(item => item.id !== product.id);
+      const cartItems = state.cartItems;
+      if(product.count > 1) {
+        cartItems.forEach(item => {
+          if(item.id === product.id){
+            item.count--;
+          }
+        });
+        // make a forloop that loops through cartItems and find the same item.id and then updates the cartItems current state inorder to update localStorage and current view
+      } else {
+        return {cartItems: cartItems.filter(item => item.id !== product.id)}; //returns a new array of all cartItems that EXCLUDE the selected product
+      }
       localStorage.setItem('cartItems', JSON.stringify(cartItems));
       return {cartItems};
     })
+    console.log('local sotrage cartItems', this.state.cartItems)
   }
 
   render() {
