@@ -3,9 +3,10 @@ import React, { Component } from 'react';
 class Basket extends Component {
     render() {
         const {cartItems} = this.props; //same as this.props.cartItems but use Object destructuring 
+        const cartItemCount = cartItems.reduce((countTotal, currentItem) => countTotal + currentItem.count, 0);
         return (
             <div className="alert alert-info">
-                {!cartItems.length ? "Basket is empty" : <div>You have {cartItems.length} products in your cart</div>}
+                {!cartItems.length ? "Basket is empty" : <div>You have {cartItemCount} products in your cart</div>}
                 {cartItems.length > 0 &&
                     <div>
                         <ul>
