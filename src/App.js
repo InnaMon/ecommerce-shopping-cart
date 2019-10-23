@@ -80,12 +80,6 @@ class App extends Component {
   }
 
   handleRemoveFromCart = (e, product) => {
-    // this.setState(state => {
-    //   const cartItems = state.cartItems.filter(item => item.id !== product.id);
-    //   localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    //   console.log('local storage cartItems', this.state.cartItems);
-    //   return {cartItems};
-    // })
     this.setState(state => {
       const cartItems = state.cartItems;
       if(product.count > 1) {
@@ -94,7 +88,6 @@ class App extends Component {
             item.count--;
           }
         });
-        // make a forloop that loops through cartItems and find the same item.id and then updates the cartItems current state inorder to update localStorage and current view
       } else {
         return {cartItems: cartItems.filter(item => item.id !== product.id)}; //returns a new array of all cartItems that EXCLUDE the selected product
       }

@@ -11,8 +11,10 @@ class Basket extends Component {
                         <ul>
                             {cartItems.map(item => 
                                 <li key={item.id}>
-                                    <b>{item.title}</b> x {item.count} = ${(item.price * item.count).toFixed(2)}
-                                    <button className="btn btn-danger"
+                                    <b>{item.title}</b> 
+                                    <br />
+                                    x {item.count} = ${(item.price * item.count).toFixed(2)}
+                                    <button className="btn btn-danger btn-sm cartItemBtn"
                                     onClick={e => this.props.handleRemoveFromCart(e, item)}
                                     >
                                     X
