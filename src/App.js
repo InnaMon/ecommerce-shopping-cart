@@ -14,13 +14,20 @@ class App extends Component {
   };
 
   componentDidMount() {
-    fetch("http://localhost:8000/products")
-        .then(response=> response.json())
-        .then(data => this.setState({ 
-          products: data,
-          filteredProducts: data
-        })
-      );
+    // fetch("http://localhost:8000/products")
+    //     .then(response=> response.json())
+    //     .then(data => this.setState({ 
+    //       products: data,
+    //       filteredProducts: data
+    //     })
+    //   );
+    fetch("https://my-json-server.typicode.com/InnaMon/ecommerce-shopping-cart/products")
+      .then(response=> response.json())
+      .then(data => this.setState({ 
+        products: data,
+        filteredProducts: data
+      })
+    );
     if(localStorage.getItem('cartItems')) {
       this.setState({cartItems: JSON.parse(localStorage.getItem('cartItems'))}) 
       // returns valued saved under the 'cartItems' key
