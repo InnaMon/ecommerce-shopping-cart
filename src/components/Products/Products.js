@@ -7,7 +7,7 @@ class Products extends Component {
                 <div className="col-md-4" key={product.id}>
                     <div className="thumbnail text-center">
                         <a href={`#${product.id}`} onClick={e => this.props.handleAddToCart(e, product)}>
-                            <img src={`./products/${product.sku}_2.JPG`} alt={product.title} />
+                            <img src={`./build/products/${product.sku}_2.JPG`} alt={product.title} />
                             <p>{product.title}</p>
                         </a>
                         <div>
